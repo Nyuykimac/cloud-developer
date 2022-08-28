@@ -1,6 +1,7 @@
-import express from 'express';
+import express, { Router, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
+
 require('dotenv').config();
 
 (async () => {
@@ -38,7 +39,7 @@ require('dotenv').config();
     res.send("try GET /filteredimage?image_url={{}}")
   } );
   
-app.get("/filteredimage", async (req, res) => {
+app.get("/filteredimage", async (req: Request, res:Response) => {
     try {
       const { image_url } = req.query;
       if (!image_url) {
@@ -55,6 +56,12 @@ app.get("/filteredimage", async (req, res) => {
       return res.status(422).send("ERROR: Image could not be downloaded, Try Again");
     }
   });
+
+
+
+
+
+  
   // Root Endpoint
   // Displays a simple message to the user
   app.get("/", async (req,  res) => {
